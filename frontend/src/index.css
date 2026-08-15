@@ -1,0 +1,171 @@
+/* Climate Impact Assessment — Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 180 30% 98%;
+    --foreground: 200 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 30% 12%;
+
+    --primary: 165 55% 32%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 165 60% 45%;
+
+    --secondary: 200 70% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 180 25% 94%;
+    --muted-foreground: 200 15% 42%;
+
+    --accent: 175 55% 92%;
+    --accent-foreground: 165 55% 22%;
+
+    --temperature: 14 85% 58%;
+    --rainfall: 205 75% 50%;
+    --ndvi: 140 55% 42%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 20% 88%;
+    --input: 180 20% 88%;
+    --ring: 165 55% 32%;
+
+    --radius: 0.875rem;
+
+    --gradient-hero: linear-gradient(135deg, hsl(165 55% 32%) 0%, hsl(195 65% 42%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(180 40% 97%) 0%, hsl(180 30% 94%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(180 30% 98%) 100%);
+    --shadow-soft: 0 1px 3px hsl(200 30% 12% / 0.04), 0 8px 24px -8px hsl(200 30% 12% / 0.08);
+    --shadow-elevated: 0 4px 12px hsl(200 30% 12% / 0.06), 0 16px 40px -12px hsl(165 55% 32% / 0.15);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 200 30% 8%;
+    --foreground: 180 30% 95%;
+
+    --card: 200 25% 12%;
+    --card-foreground: 180 30% 95%;
+
+    --popover: 200 25% 12%;
+    --popover-foreground: 180 30% 95%;
+
+    --primary: 165 60% 50%;
+    --primary-foreground: 200 30% 8%;
+
+    --secondary: 200 70% 55%;
+    --secondary-foreground: 200 30% 8%;
+
+    --muted: 200 25% 16%;
+    --muted-foreground: 180 15% 65%;
+
+    --accent: 200 25% 18%;
+    --accent-foreground: 165 60% 70%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 25% 18%;
+    --input: 200 25% 18%;
+    --ring: 165 60% 50%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .gradient-hero { background: var(--gradient-hero); }
+  .gradient-soft { background: var(--gradient-soft); }
+  .gradient-card { background: var(--gradient-card); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+  .transition-smooth { transition: var(--transition-smooth); }
+}
+
+/* Leaflet container */
+.leaflet-container {
+  font-family: 'Inter', sans-serif;
+  border-radius: var(--radius);
+}
+
+@layer utilities {
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(2.4); opacity: 0; }
+  }
+  .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+  .animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.4, 0, 0.2, 1) both; }
+  .animate-pulse-ring { animation: pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(165 55% 32%), hsl(195 70% 45%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-pattern {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.4) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.4) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+}
